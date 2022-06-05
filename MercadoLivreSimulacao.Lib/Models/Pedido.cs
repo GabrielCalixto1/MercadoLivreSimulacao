@@ -7,6 +7,8 @@ namespace MercadoLivreSimulacao.Lib.Models
         public int IdUsuario { get; set; }
         public DateTime DataPedido { get; set; }
         public string StatusPedido { get; set; }
+        public Vendedor Vendedores {get; set;}
+        
         public Pedido(int idPedido, int idTransportadora, int idUsuario, DateTime dataPedido, string statusPedido)
         {
             IdPedido = idPedido;

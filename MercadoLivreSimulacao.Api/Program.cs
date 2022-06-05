@@ -10,6 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddDbContext<MercadoLivreContext>(
         conn => conn.UseNpgsql(builder.Configuration.GetConnectionString("MercadoDB"))
+        .UseSnakeCaseNamingConvention()
     );
 
 builder.Services.AddControllers();

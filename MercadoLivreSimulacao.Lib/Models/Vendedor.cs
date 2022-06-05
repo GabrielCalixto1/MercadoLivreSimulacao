@@ -7,6 +7,10 @@ namespace MercadoLivreSimulacao.Lib.Models
         public string Email { get; set; }
         public string Cnpj { get; set; }
         public DateTime DataCadastro { get; set; }
+
+
+        public virtual List<Produto> ListaProdutos { get; set; } = new List<Produto>();
+        
         public Vendedor(int idVendedor, string nome, string email, string cnpj, DateTime dataCadastro)
         {
             IdVendedor = idVendedor;

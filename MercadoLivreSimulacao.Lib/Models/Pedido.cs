@@ -8,6 +8,7 @@ namespace MercadoLivreSimulacao.Lib.Models
         public int IdTransportadora { get; set; }
         public int IdUsuario { get; set; }
 
+
         public virtual Transportadora Transportadora {get; set;}
         public virtual Usuario Usuario {get; set;}
         public virtual Vendedor Vendedor {get; set;}

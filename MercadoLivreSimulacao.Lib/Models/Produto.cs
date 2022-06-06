@@ -12,7 +12,7 @@ namespace MercadoLivreSimulacao.Lib.Models
         
        
         public virtual Vendedor Vendedor {get; set;}
-        public virtual List<ProdutoXPedido> ListaProdutosXPedidos { get; set; }
+        public List<ProdutoXPedido> ListaProdutosXPedidos { get; set; }
 
         public Produto(int idProduto, int idVendedor, string nome, string descricao, double valor, DateTime dataCadastro)
         {

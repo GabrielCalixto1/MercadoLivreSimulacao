@@ -39,7 +39,7 @@ public class PedidoController : ControllerBase
     [HttpPost("Adicionar")]
     public IActionResult Adicionar(PedidoDTO pedidoDto)
     {
-        var pedido = new Pedido(pedidoDto.IdPedido, pedidoDto.IdTransportadora, pedidoDto.IdUsuario, pedidoDto.DataPedido, pedidoDto.StatusPedido, pedidoDto.Transportadora, pedidoDto.Usuario, pedidoDto.Vendedor);
+        var pedido = new Pedido(pedidoDto.IdPedido, pedidoDto.IdTransportadora, pedidoDto.IdUsuario, pedidoDto.DataPedido, pedidoDto.StatusPedido);
         _context.PedidoDb.Add(pedido);
         _context.SaveChanges();
         return Ok(pedido);

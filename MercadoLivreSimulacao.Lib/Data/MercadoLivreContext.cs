@@ -48,19 +48,22 @@ namespace MercadoLivreSimulacao.Lib.Data
             modelBuilder.Entity<Transportadora>().HasKey(key => key.IdTransportadora);
             modelBuilder.Entity<Transportadora>()
                         .HasMany(x => x.ListaPedidos)
-                        .WithOne(x => x.Transportadora);
+                        .WithOne(x => x.Transportadora)
+                        .HasForeignKey(x => x.IdTransportadora);
 
             modelBuilder.Entity<Usuario>().ToTable("ml_usuarios");
             modelBuilder.Entity<Usuario>().HasKey(key => key.IdUsuario);
             modelBuilder.Entity<Usuario>()
                         .HasMany(x => x.ListaPedidos)
-                        .WithOne(x => x.Usuario);
+                        .WithOne(x => x.Usuario)
+                        .HasForeignKey(x => x.IdUsuario);
 
             modelBuilder.Entity<Vendedor>().ToTable("ml_vendedores");
             modelBuilder.Entity<Vendedor>().HasKey(key => key.IdVendedor);
             modelBuilder.Entity<Vendedor>()
                         .HasMany(x => x.ListaProdutos)
-                        .WithOne(x => x.Vendedor);            
+                        .WithOne(x => x.Vendedor)
+                        .HasForeignKey(x => x.IdVendedor) ; 
             
         }
         public DbSet<Produto> ProdutoDb { get; set; }

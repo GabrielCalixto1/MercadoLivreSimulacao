@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-
+using MercadoLivreSimulacao.Lib.Data;
 namespace MercadoLivreSimulacao.Api.Controllers;
 
 [ApiController]
@@ -12,11 +12,24 @@ public class WeatherForecastController : ControllerBase
     };
 
     private readonly ILogger<WeatherForecastController> _logger;
+    private readonly MercadoLivreContext _context;
 
-    public WeatherForecastController(ILogger<WeatherForecastController> logger)
+    public WeatherForecastController(ILogger<WeatherForecastController> logger, MercadoLivreContext context)
     {
         _logger = logger;
+        _context = context;
     }
+
+    [HttpGet("Outra")]
+    public IActionResult GetTeste()
+    {
+        return Ok(_context.UsuarioDb.ToList());
+    }
+
+
+
+
+
 
     [HttpGet(Name = "GetWeatherForecast")]
     public IEnumerable<WeatherForecast> Get()

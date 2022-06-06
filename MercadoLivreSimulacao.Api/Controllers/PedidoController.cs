@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MercadoLivreSimulacao.Lib.Data;
 using MercadoLivreSimulacao.Lib.Models;
+using MercadoLivreSimulacao.Api.DTOs;
 
 namespace ProjetoMercadoLivre.Web.Controllers;
 
@@ -29,7 +30,7 @@ public class PedidoController : ControllerBase
     }
 
     [HttpGet("ListarUm")]
-    public IActionResult LustarUm(int id)
+    public IActionResult ListarUm(int id)
     {
         var pedido = _context.PedidoDb.Find(id);
         return Ok(pedido);
@@ -38,7 +39,7 @@ public class PedidoController : ControllerBase
     [HttpPost("Adicionar")]
     public IActionResult Adicionar(PedidoDTO pedidoDto)
     {
-        var pedido = new Pedido(pedidoDto.IdPedido, pedidoDto.IdTransportadora, pedidoDto.IdUsuario, pedidoDto.DataPedido, pedidoDto.StatusPedido, pedidoDto.Transportadora, pedidoDto.Cliente);
+        var pedido = new Pedido(pedidoDto.IdPedido, pedidoDto.IdTransportadora, pedidoDto.IdUsuario, pedidoDto.DataPedido, pedidoDto.StatusPedido, pedidoDto.Transportadora, pedidoDto.Usuario, pedidoDto.Vendedor);
         _context.PedidoDb.Add(pedido);
         _context.SaveChanges();
         return Ok(pedido);

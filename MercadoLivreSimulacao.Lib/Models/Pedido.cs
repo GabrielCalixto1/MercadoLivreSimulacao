@@ -14,13 +14,16 @@ namespace MercadoLivreSimulacao.Lib.Models
         public virtual Vendedor Vendedor {get; set;}
         public List<ProdutoXPedido> ListaProdutosXPedidos { get; set; }
 
-        public Pedido(int idPedido, int idTransportadora, int idUsuario, DateTime dataPedido, string statusPedido)
+        public Pedido(int idPedido, int idTransportadora, int idUsuario, DateTime dataPedido, string statusPedido, Transportadora transportadora, Usuario usuario, Vendedor vendedor)
         {
             IdPedido = idPedido;
             IdTransportadora = idTransportadora;
             IdUsuario = idUsuario;
             DataPedido = dataPedido;
             StatusPedido = statusPedido;
+            Transportadora = transportadora;
+            Usuario = usuario;
+            Vendedor = vendedor;
         }
     }
 }

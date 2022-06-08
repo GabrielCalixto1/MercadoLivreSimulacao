@@ -1,5 +1,7 @@
 using Serilog;
 using MercadoLivreSimulacao.Lib.Data;
+using MercadoLivreSimulacao.Lib.Models;
+using MercadoLivreSimulacao.Lib.Data.Repositorios;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,7 +15,16 @@ builder.Services.AddDbContext<MercadoLivreContext>(
         .UseSnakeCaseNamingConvention()
     );
 
-builder.Services.AddControllers();
+builder.Services.AddScoped<PedidoRepositorio>();
+builder.Services.AddScoped<ProdutoRepositorio>();
+builder.Services.AddScoped<ProdutoXPedidoRepositorio>();
+builder.Services.AddScoped<TransportadoraRepositorio>();
+builder.Services.AddScoped<UsuarioRepositorio>();
+builder.Services.AddScoped<VendedorRepositorio>();
+
+builder.Services.AddControllers()
+                .AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

@@ -8,7 +8,7 @@ namespace MercadoLivreSimulacao.Lib.Models
         public string Email { get; set; }
 
 
-        public virtual List<Pedido> ListaPedidos { get; set; } = new List<Pedido>();
+        public List<Pedido> ListaPedidos { get; set; } = new List<Pedido>();
 
         public Transportadora(int idTransportadora, string nome, string telefone, string email)
         {

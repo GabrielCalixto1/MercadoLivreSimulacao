@@ -1,4 +1,3 @@
-using MercadoLivreSimulacao.Lib.Models;
 namespace MercadoLivreSimulacao.Api.DTOs
 {
     public class UsuarioDTO
@@ -11,6 +10,5 @@ namespace MercadoLivreSimulacao.Api.DTOs
         public string Senha { get; set; }
 
 
-        public virtual List<Pedido> ListaPedidos { get; set; } = new List<Pedido>();
     }
 }

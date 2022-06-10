@@ -1,4 +1,3 @@
-using Microsoft.EntityFrameworkCore;
 using MercadoLivreSimulacao.Lib.Models;
 namespace MercadoLivreSimulacao.Lib.Data.Repositorios
 {
@@ -14,6 +13,14 @@ namespace MercadoLivreSimulacao.Lib.Data.Repositorios
         {
             _context = context;
         }
+
+
+      public void AlterarValor(int id, double valor)
+    {
+        var produto = _context.ProdutoDb.Find(id);
+        produto.Valor = valor;
+        _context.SaveChanges();
+    }
     
 
     }

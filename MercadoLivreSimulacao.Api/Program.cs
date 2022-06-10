@@ -1,6 +1,5 @@
 using Serilog;
 using MercadoLivreSimulacao.Lib.Data;
-using MercadoLivreSimulacao.Lib.Models;
 using MercadoLivreSimulacao.Lib.Data.Repositorios;
 using Microsoft.EntityFrameworkCore;
 

@@ -1,8 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using MercadoLivreSimulacao.Lib.Data;
 using MercadoLivreSimulacao.Lib.Models;
-using MercadoLivreSimulacao.Api.DTOs;
+using MercadoLivreSimulacao.Lib.Data.Repositorios;
 
 namespace ProjetoMercadoLivre.Web.Controllers;
 
@@ -14,52 +12,43 @@ public class TransportadoraController : ControllerBase
 
 
     private readonly ILogger<TransportadoraController> _logger;
-    private readonly MercadoLivreContext _context;
+    private readonly TransportadoraRepositorio _repositorio;
 
-    public TransportadoraController(ILogger<TransportadoraController> logger, MercadoLivreContext context)
+    public TransportadoraController(ILogger<TransportadoraController> logger, TransportadoraRepositorio repositorio)
     {
         _logger = logger;
-        _context = context;
+        _repositorio = repositorio;
     }
 
     [HttpGet("ListarTodos")]
     public IActionResult ListarTodos()
     {
-        var transportadoras = _context.TransportadorasDb.AsNoTracking().ToList();
-        return Ok(transportadoras);
+        
+        return Ok(_repositorio.GetTodos);
     }
-
-    [HttpGet("ListarUm")]
-    public IActionResult ListarUm(int id)
-    {
-        var transportadora = _context.TransportadorasDb.Find(id);
-        return Ok(transportadora);
+      [HttpGet("MostrarPorId")]
+    public IActionResult MostrarItem(int id)
+    {  
+        return Ok(_repositorio.MostrarPorId(id));
     }
 
     [HttpPost("Adicionar")]
-    public IActionResult Adicionar(TransportadoraDTO transportadoraDto)
+    public IActionResult Adicionar(Transportadora item)
     {
-        var transportadora = new Transportadora(transportadoraDto.IdTransportadora, transportadoraDto.Nome, transportadoraDto.Telefone, transportadoraDto.Email);
-        _context.TransportadorasDb.Add(transportadora);
-        _context.SaveChanges();
-        return Ok(transportadora);
-    }
-
-    [HttpPut("AlterarEmail")]
-   public IActionResult AlterarEmail(int id, string email)
-    {
-        var transportadora = _context.TransportadorasDb.Find(id);
-        transportadora.Email = email;
-        _context.SaveChanges();
-        return Ok(transportadora);
+        _repositorio.AdicionarItem(item);
+        return Ok("Adicionado item com sucesso!!");
     }
 
     [HttpDelete("Deletar")]
-    public IActionResult Deletar(int id)
+    public IActionResult DeletarPorId(int id)
     {
-        var transportadora = _context.TransportadorasDb.Find(id);
-        _context.TransportadorasDb.Remove(transportadora);
-        _context.SaveChanges();
-        return Ok();
+      _repositorio.DeletarPorId(id);
+        return Ok("Deletado com sucesso!!");
+    }
+       [HttpPut("AlterarEmail")]
+   public IActionResult AlterarEmail(int id, string email)
+    {
+        _repositorio.AlterarEmail(id, email);
+        return Ok("Email alterado com sucesso!!");
     }
 }

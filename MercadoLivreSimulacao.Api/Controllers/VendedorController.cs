@@ -1,8 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using MercadoLivreSimulacao.Lib.Data;
 using MercadoLivreSimulacao.Lib.Models;
-using MercadoLivreSimulacao.Api.DTOs;
+using MercadoLivreSimulacao.Lib.Data.Repositorios;
 
 namespace ProjetoMercadoLivre.Web.Controllers;
 
@@ -14,52 +12,46 @@ public class VendedorController : ControllerBase
 
 
     private readonly ILogger<VendedorController> _logger;
-    private readonly MercadoLivreContext _context;
+    private readonly VendedorRepositorio _repositorio;
 
-    public VendedorController(ILogger<VendedorController> logger, MercadoLivreContext context)
+    public VendedorController(ILogger<VendedorController> logger, VendedorRepositorio repositorio)
     {
         _logger = logger;
-        _context = context;
+        _repositorio = repositorio;
     }
 
     [HttpGet("ListarTodos")]
     public IActionResult ListarTodos()
     {
-        var vendedors = _context.VendedorDb.AsNoTracking().ToList();
-        return Ok(vendedors);
+        
+        return Ok(_repositorio.GetTodos);
     }
-
-    [HttpGet("ListarUm")]
-    public IActionResult ListarUm(int id)
-    {
-        var vendedor = _context.VendedorDb.Find(id);
-        return Ok(vendedor);
+      [HttpGet("MostrarPorId")]
+    public IActionResult MostrarItem(int id)
+    {  
+        return Ok(_repositorio.MostrarPorId(id));
     }
 
     [HttpPost("Adicionar")]
-    public IActionResult Adicionar(VendedorDTO vendedorDto)
+    public IActionResult Adicionar(Vendedor item)
     {
-        var vendedor = new Vendedor(vendedorDto.IdVendedor, vendedorDto.Nome, vendedorDto.Email, vendedorDto.Cnpj, vendedorDto.DataCadastro);
-        _context.VendedorDb.Add(vendedor);
-        _context.SaveChanges();
-        return Ok(vendedor);
+        _repositorio.AdicionarItem(item);
+        return Ok("Adicionado item com sucesso!!");
+    }
+
+    [HttpDelete("Deletar")]
+    public IActionResult DeletarPorId(int id)
+    {
+      _repositorio.DeletarPorId(id);
+        return Ok("Deletado com sucesso!!");
     }
 
     [HttpPut("AlterarEmail")]
     public IActionResult AlterarEmail(int id, string email)
     {
-        var vendedor = _context.VendedorDb.Find(id);
-        vendedor.Email = email;
-        _context.SaveChanges();
-        return Ok(vendedor);
+        _repositorio.AlterarEmail(id, email);
+        return Ok("Email alterado com sucesso!");
     }
 
-    [HttpDelete("Deletar")]
-    public IActionResult Deletar(int id)
-    {
-        var vendedor = _context.VendedorDb.Find(id);
-        _context.VendedorDb.Remove(vendedor);
-        _context.SaveChanges();
-        return Ok();
-    }
+  
 }

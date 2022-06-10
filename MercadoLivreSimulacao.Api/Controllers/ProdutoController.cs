@@ -1,8 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using MercadoLivreSimulacao.Lib.Data;
 using MercadoLivreSimulacao.Lib.Models;
-using MercadoLivreSimulacao.Api.DTOs;
+using MercadoLivreSimulacao.Lib.Data.Repositorios;
 
 namespace ProjetoMercadoLivre.Web.Controllers;
 
@@ -14,52 +12,45 @@ public class ProdutoController : ControllerBase
 
 
     private readonly ILogger<ProdutoController> _logger;
-    private readonly MercadoLivreContext _context;
+    private readonly ProdutoRepositorio _repositorio;
 
-    public ProdutoController(ILogger<ProdutoController> logger, MercadoLivreContext context)
+    public ProdutoController(ILogger<ProdutoController> logger, ProdutoRepositorio repositorio)
     {
         _logger = logger;
-        _context = context;
+        _repositorio = repositorio;
     }
 
     [HttpGet("ListarTodos")]
     public IActionResult ListarTodos()
     {
-        var produtos = _context.ProdutoDb.AsNoTracking().ToList();
-        return Ok(produtos);
+        
+        return Ok(_repositorio.GetTodos);
     }
-
-    [HttpGet("ListarUm")]
-    public IActionResult ListarUm(int id)
-    {
-        var produto = _context.ProdutoDb.Find(id);
-        return Ok(produto);
+      [HttpGet("MostrarPorId")]
+    public IActionResult MostrarItem(int id)
+    {  
+        return Ok(_repositorio.MostrarPorId(id));
     }
+   
 
     [HttpPost("Adicionar")]
-    public IActionResult Adicionar(ProdutoDTO produtoDto)
+    public IActionResult Adicionar(Produto item)
     {
-        var produto = new Produto(produtoDto.IdProduto, produtoDto.IdVendedor, produtoDto.Nome, produtoDto.Descricao, produtoDto.Valor, produtoDto.DataCadastro);
-        _context.ProdutoDb.Add(produto);
-        _context.SaveChanges();
-        return Ok(produto);
-    }
-
-    [HttpPut("AlterarProduto")]
-      public IActionResult AlterarValor(int id, double valor)
-    {
-        var produto = _context.ProdutoDb.Find(id);
-        produto.Valor = valor;
-        _context.SaveChanges();
-        return Ok(produto);
+        _repositorio.AdicionarItem(item);
+        return Ok("Adicionado item com sucesso!!");
     }
 
     [HttpDelete("Deletar")]
-    public IActionResult Deletar(int id)
+    public IActionResult DeletarPorId(int id)
     {
-        var produto = _context.ProdutoDb.Find(id);
-        _context.ProdutoDb.Remove(produto);
-        _context.SaveChanges();
-        return Ok();
+      _repositorio.DeletarPorId(id);
+        return Ok("Deletado com sucesso!!");
+    }
+    
+      [HttpPut("AlterarValor")]
+      public IActionResult AlterarValor(int id, double valor)
+    {
+        _repositorio.AlterarValor(id, valor);
+        return Ok("Valor alterado!!");
     }
 }

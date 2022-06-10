@@ -1,4 +1,3 @@
-using Microsoft.EntityFrameworkCore;
 using MercadoLivreSimulacao.Lib.Models;
 namespace MercadoLivreSimulacao.Lib.Data.Repositorios
 {
@@ -14,7 +13,11 @@ namespace MercadoLivreSimulacao.Lib.Data.Repositorios
         {
             _context = context;
         }
-    
-
+        public void AlterarEmail(int id, string email)
+        {
+            var vendedor = _context.VendedorDb.Find(id);
+            vendedor.Email = email;
+            _context.SaveChanges();
+        }
     }
 }

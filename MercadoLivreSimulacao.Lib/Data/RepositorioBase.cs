@@ -1,4 +1,3 @@
-using MercadoLivreSimulacao.Lib.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace MercadoLivreSimulacao.Lib.Data.Repositorios
@@ -15,30 +14,31 @@ namespace MercadoLivreSimulacao.Lib.Data.Repositorios
         public RepositorioBase(DbSet<T> dbset, MercadoLivreContext context)
         {
             _context = context;
-            _dbset =  dbset;
+            _dbset = dbset;
         }
 
         public List<T> GetTodos()
         {
-            var getlista = _dbset.ToList();
-            return getlista;
+            return (_dbset.AsNoTracking().ToList());
         }
-           public void MostrarItemPorID(T item)
+
+        public T MostrarPorId(int id)
         {
-            _dbset.Find(item);
-            _context.SaveChanges();
+            return (_dbset.Find(id));
         }
-        public void SalvarItem(T item)
+        public void AdicionarItem(T item)
         {
             _dbset.Add(item);
             _context.SaveChanges();
+            
         }
-           public void DeletarItem(T item)
+        public void DeletarPorId(int id)
         {
-            _dbset.Remove(item);
+            var item = _dbset.Find(id);
+            _context.Remove(item);
             _context.SaveChanges();
+
         }
 
-   
     }
 }

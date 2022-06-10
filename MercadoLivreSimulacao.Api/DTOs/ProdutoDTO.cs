@@ -1,4 +1,3 @@
-using MercadoLivreSimulacao.Lib.Models;
 namespace MercadoLivreSimulacao.Api.DTOs
 {
     public class ProdutoDTO
@@ -11,8 +10,5 @@ namespace MercadoLivreSimulacao.Api.DTOs
         public int IdVendedor { get; set; }
 
 
-
-        public virtual Vendedor Vendedor { get; set; }
-        public List<ProdutoXPedido> ListaProdutosXPedidos { get; set; }
     }
 }

@@ -1,8 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using MercadoLivreSimulacao.Lib.Data;
 using MercadoLivreSimulacao.Lib.Models;
-using MercadoLivreSimulacao.Api.DTOs;
+using MercadoLivreSimulacao.Lib.Data.Repositorios;
 
 namespace ProjetoMercadoLivre.Web.Controllers;
 
@@ -14,52 +12,43 @@ public class PedidoController : ControllerBase
 
 
     private readonly ILogger<PedidoController> _logger;
-    private readonly MercadoLivreContext _context;
+    private readonly PedidoRepositorio _repositorio;
 
-    public PedidoController(ILogger<PedidoController> logger, MercadoLivreContext context)
+    public PedidoController(ILogger<PedidoController> logger, PedidoRepositorio repositorio)
     {
         _logger = logger;
-        _context = context;
+        _repositorio = repositorio;
     }
 
     [HttpGet("ListarTodos")]
     public IActionResult ListarTodos()
     {
-        var pedidos = _context.PedidoDb.AsNoTracking().ToList();
-        return Ok(pedidos);
+        
+        return Ok(_repositorio.GetTodos());
     }
-
-    [HttpGet("ListarUm")]
-    public IActionResult ListarUm(int id)
-    {
-        var pedido = _context.PedidoDb.Find(id);
-        return Ok(pedido);
+      [HttpGet("MostrarPorId")]
+    public IActionResult MostrarItem(int id)
+    {  
+        return Ok(_repositorio.MostrarPorId(id));
     }
 
     [HttpPost("Adicionar")]
-    public IActionResult Adicionar(PedidoDTO pedidoDto)
+    public IActionResult Adicionar(Pedido item)
     {
-        var pedido = new Pedido(pedidoDto.IdPedido, pedidoDto.IdTransportadora, pedidoDto.IdUsuario, pedidoDto.DataPedido, pedidoDto.StatusPedido);
-        _context.PedidoDb.Add(pedido);
-        _context.SaveChanges();
-        return Ok(pedido);
-    }
-
-    [HttpPut("AlterarStatus")]
-    public IActionResult AlterarStatus(int id, string status)
-    {
-        var pedido = _context.PedidoDb.Find(id);
-        pedido.StatusPedido = status;
-        _context.SaveChanges();
-        return Ok(pedido);
+        _repositorio.AdicionarItem(item);
+        return Ok("Adicionado item com sucesso!!");
     }
 
     [HttpDelete("Deletar")]
-    public IActionResult Deletar(int id)
+    public IActionResult DeletarPorId(int id)
     {
-        var pedido = _context.PedidoDb.Find(id);
-        _context.PedidoDb.Remove(pedido);
-        _context.SaveChanges();
-        return Ok();
+      _repositorio.DeletarPorId(id);
+        return Ok("Deletado com sucesso!!");
+    }
+       [HttpPut("AlterarStatus")]
+    public IActionResult AlterarStatus(int id, string status)
+    {
+        _repositorio.AlterarStatus(id, status);
+        return Ok("Status alterado!!");
     }
 }

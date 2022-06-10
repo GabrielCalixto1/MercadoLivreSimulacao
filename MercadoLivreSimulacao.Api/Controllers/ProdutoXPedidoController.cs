@@ -45,15 +45,7 @@ public class ProdutoXPedidoController : ControllerBase
         return Ok(produtoXProdutoXPedido);
     }
 
-    [HttpPut("AlterarValor")]
-    public IActionResult AlterarValor(int id, int idProduto)
-    {
-        var produtoXPedido = _context.ProdutoXPedidoDb.Find(id);
-        var produto = _context.ProdutoDb.Find(idProduto);
-        produtoXPedido.Produto = produto;
-        _context.SaveChanges();
-        return Ok("Alteracao bem sucedida!");
-    }
+
     [HttpDelete("Deletar")]
     public IActionResult Deletar(int id)
     {
@@ -61,5 +53,14 @@ public class ProdutoXPedidoController : ControllerBase
         _context.ProdutoXPedidoDb.Remove(produtoXProdutoXPedido);
         _context.SaveChanges();
         return Ok();
+    }
+        [HttpPut("AlterarValor")]
+    public IActionResult AlterarValor(int id, int idProduto)
+    {
+        var produtoXPedido = _context.ProdutoXPedidoDb.Find(id);
+        var produto = _context.ProdutoDb.Find(idProduto);
+        produtoXPedido.Produto = produto;
+        _context.SaveChanges();
+        return Ok("Alteracao bem sucedida!");
     }
 }

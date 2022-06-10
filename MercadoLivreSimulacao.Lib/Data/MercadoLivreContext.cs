@@ -19,7 +19,11 @@ namespace MercadoLivreSimulacao.Lib.Data
                         .HasOne(x=> x.Vendedor)
                         .WithMany(x => x.ListaProdutos)
                         .HasForeignKey(x => x.IdVendedor);
-
+           modelBuilder.Entity<Produto>().Property(x => x.DataCadastro).HasColumnName("data_cadastro_produto");
+           modelBuilder.Entity<Produto>().Property(x => x.Descricao).HasColumnName("descricao_produto");
+           modelBuilder.Entity<Produto>().Property(x => x.Nome).HasColumnName("nome_produto");
+           modelBuilder.Entity<Produto>().Property(x => x.Valor).HasColumnName("valor_produto");
+           
 
             modelBuilder.Entity<Pedido>().ToTable("ml_pedidos");
             modelBuilder.Entity<Pedido>().HasKey(key => key.IdPedido);

@@ -1,4 +1,3 @@
-using Microsoft.EntityFrameworkCore;
 using MercadoLivreSimulacao.Lib.Models;
 namespace MercadoLivreSimulacao.Lib.Data.Repositorios
 {

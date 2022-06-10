@@ -1,4 +1,3 @@
-using MercadoLivreSimulacao.Lib.Models;
 namespace MercadoLivreSimulacao.Api.DTOs
 {
     public class VendedorDTO
@@ -10,6 +9,5 @@ namespace MercadoLivreSimulacao.Api.DTOs
         public DateTime DataCadastro { get; set; }
 
 
-        public List<Produto> ListaProdutos { get; set; } = new List<Produto>();
     }
 }

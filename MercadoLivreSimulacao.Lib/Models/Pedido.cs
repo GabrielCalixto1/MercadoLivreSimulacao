@@ -1,6 +1,6 @@
 namespace MercadoLivreSimulacao.Lib.Models
 {
-    public class Pedido
+    public class Pedido : ModelBase
     {
         public int IdPedido { get; set; }
         public DateTime DataPedido { get; set; }

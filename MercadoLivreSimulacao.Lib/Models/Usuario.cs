@@ -1,6 +1,6 @@
 namespace MercadoLivreSimulacao.Lib.Models
 {
-    public class Usuario
+    public class Usuario : ModelBase
     {
         public int IdUsuario { get; set; }
         public string Nome { get; set; }

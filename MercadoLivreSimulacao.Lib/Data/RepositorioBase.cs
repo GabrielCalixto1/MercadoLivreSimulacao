@@ -1,10 +1,12 @@
+using MercadoLivreSimulacao.Lib.Data.Repositorios.Interface;
+using MercadoLivreSimulacao.Lib.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace MercadoLivreSimulacao.Lib.Data.Repositorios
 {
 
 
-    public class RepositorioBase<T> where T : class
+    public class RepositorioBase<T> : IRepositorioBase<T> where T : ModelBase
     {
 
 
@@ -24,7 +26,7 @@ namespace MercadoLivreSimulacao.Lib.Data.Repositorios
 
         public T MostrarPorId(int id)
         {
-            return (_dbset.Find(id));
+            return (_dbset.AsNoTracking().First(x => x.Id == id));
         }
         public void AdicionarItem(T item)
         {
@@ -40,5 +42,9 @@ namespace MercadoLivreSimulacao.Lib.Data.Repositorios
 
         }
 
+        public List<T> BuscarTodos()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

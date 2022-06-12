@@ -1,7 +1,9 @@
 using Serilog;
 using MercadoLivreSimulacao.Lib.Data;
 using MercadoLivreSimulacao.Lib.Data.Repositorios;
+using MercadoLivreSimulacao.Lib.Models;
 using Microsoft.EntityFrameworkCore;
+using MercadoLivreSimulacao.Lib.Data.Repositorios.Interface;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,6 +22,8 @@ builder.Services.AddScoped<ProdutoXPedidoRepositorio>();
 builder.Services.AddScoped<TransportadoraRepositorio>();
 builder.Services.AddScoped<UsuarioRepositorio>();
 builder.Services.AddScoped<VendedorRepositorio>();
+/*builder.Services.AddScoped<PedidoRepositorio>, <IPedidoRepositorio>();
+builder.Services.AddScoped<IRepositorioBase<Produto>,RepositorioBase<Produto>();*/
 
 builder.Services.AddControllers()
                 .AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);

@@ -1,9 +1,10 @@
+using MercadoLivreSimulacao.Lib.Data.Repositorios.Interface;
 using MercadoLivreSimulacao.Lib.Models;
 namespace MercadoLivreSimulacao.Lib.Data.Repositorios
 {
 
 
-    public class PedidoRepositorio : RepositorioBase<Pedido>
+    public class PedidoRepositorio : RepositorioBase<Pedido>, IPedidoRepositorio
     {
 
 

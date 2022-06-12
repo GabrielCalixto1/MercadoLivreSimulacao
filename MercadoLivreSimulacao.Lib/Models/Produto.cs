@@ -1,6 +1,6 @@
 namespace MercadoLivreSimulacao.Lib.Models
 {
-    public class Produto
+    public class Produto : ModelBase
     {
         public int IdProduto { get; set; }
         public string Nome { get; set; }

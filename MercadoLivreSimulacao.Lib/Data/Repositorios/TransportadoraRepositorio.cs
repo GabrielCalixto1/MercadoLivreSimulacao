@@ -1,9 +1,10 @@
+using MercadoLivreSimulacao.Lib.Data.Repositorios.Interface;
 using MercadoLivreSimulacao.Lib.Models;
 namespace MercadoLivreSimulacao.Lib.Data.Repositorios
 {
 
 
-    public class TransportadoraRepositorio : RepositorioBase<Transportadora>
+    public class TransportadoraRepositorio : RepositorioBase<Transportadora>, ITransportadoraRepositorio
     {
 
 

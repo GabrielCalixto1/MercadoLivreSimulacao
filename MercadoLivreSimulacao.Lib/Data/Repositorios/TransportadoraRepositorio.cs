@@ -17,7 +17,7 @@ namespace MercadoLivreSimulacao.Lib.Data.Repositorios
         public void AlterarEmail(int id, string email)
         {
             var transportadora = _context.TransportadorasDb.Find(id);
-            transportadora.Email = email;
+            transportadora.SetEmail(email);
             _context.SaveChanges();
         }
     }

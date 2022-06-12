@@ -5,13 +5,13 @@ namespace MercadoLivreSimulacao.Lib.Models
         public int IdProduto { get; set; }
         public string Nome { get; set; }
         public string Descricao { get; set; }
-        public double Valor { get; set; }
-        public DateTime DataCadastro { get; set; }
+        public double Valor { get; private set; }
+        public DateTime DataCadastro { get; private set; }
         public int IdVendedor { get; set; }
 
-        
-       
-        public virtual Vendedor Vendedor {get; set;}
+
+
+        public virtual Vendedor Vendedor { get; set; }
         public List<ProdutoXPedido> ListaProdutosXPedidos { get; set; }
 
         public Produto(int idProduto, int idVendedor, string nome, string descricao, double valor, DateTime dataCadastro)
@@ -19,8 +19,28 @@ namespace MercadoLivreSimulacao.Lib.Models
             IdProduto = idProduto;
             Nome = nome;
             Descricao = descricao;
-            Valor = valor;
-            DataCadastro = dataCadastro;
+            SetValor(valor);
+            SetData(dataCadastro);
+        }
+        public void SetValor(double valor)
+        {
+            ValorProdutoDeveSerMaiorQueZero(valor);
+        }
+        public void SetData(DateTime dataProduto)
+        {
+            if (DataEMaiorQueDataAtual(dataProduto))
+            {
+                DataCadastro = dataProduto;
+            }
+        }
+
+        public void ValorProdutoDeveSerMaiorQueZero(double valor)
+        {
+            if (valor > 0)
+            {
+                Valor = valor;
+            }
+
         }
     }
 }

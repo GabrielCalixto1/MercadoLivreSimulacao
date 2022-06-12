@@ -19,7 +19,7 @@ namespace MercadoLivreSimulacao.Lib.Data.Repositorios
         public void AlterarValor(int id, double valor)
         {
             var produto = _context.ProdutoDb.Find(id);
-            produto.Valor = valor;
+            produto.SetValor(valor);
             _context.SaveChanges();
         }
 

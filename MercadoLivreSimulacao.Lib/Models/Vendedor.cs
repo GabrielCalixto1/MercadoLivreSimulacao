@@ -15,9 +15,17 @@ namespace MercadoLivreSimulacao.Lib.Models
         {
             IdVendedor = idVendedor;
             Nome = nome;
-            Email = email;
+            SetEmail(email);
             Cnpj = cnpj;
             DataCadastro = dataCadastro;
         }
+        public void SetEmail(string email)
+        {
+            if(EmailContemArroba(email))
+            {
+                Email = email;
+            }
+        }
+
     }
 }

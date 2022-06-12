@@ -17,7 +17,7 @@ namespace MercadoLivreSimulacao.Lib.Data.Repositorios
         public void AlterarSenha(int id, string senha)
         {
             var usuario = _context.UsuarioDb.Find(id);
-            usuario.Senha = senha;
+            usuario.SetSenha(senha);
             _context.SaveChanges();
         }
 

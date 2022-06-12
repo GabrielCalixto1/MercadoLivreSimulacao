@@ -16,14 +16,12 @@ builder.Services.AddDbContext<MercadoLivreContext>(
         .UseSnakeCaseNamingConvention()
     );
 
-builder.Services.AddScoped<PedidoRepositorio>();
-builder.Services.AddScoped<ProdutoRepositorio>();
-builder.Services.AddScoped<ProdutoXPedidoRepositorio>();
-builder.Services.AddScoped<TransportadoraRepositorio>();
-builder.Services.AddScoped<UsuarioRepositorio>();
-builder.Services.AddScoped<VendedorRepositorio>();
-/*builder.Services.AddScoped<PedidoRepositorio>, <IPedidoRepositorio>();
-builder.Services.AddScoped<IRepositorioBase<Produto>,RepositorioBase<Produto>();*/
+
+builder.Services.AddScoped<IPedidoRepositorio, PedidoRepositorio>();
+builder.Services.AddScoped<IProdutoRepositorio, ProdutoRepositorio>();
+builder.Services.AddScoped<IProdutoXPedidoRepositorio, ProdutoXPedidoRepositorio>();
+builder.Services.AddScoped<ITransportadoraRepositorio, TransportadoraRepositorio>();
+builder.Services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
 
 builder.Services.AddControllers()
                 .AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);

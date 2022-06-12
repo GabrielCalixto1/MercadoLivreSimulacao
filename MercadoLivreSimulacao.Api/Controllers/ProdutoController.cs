@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using MercadoLivreSimulacao.Lib.Models;
 using MercadoLivreSimulacao.Lib.Data.Repositorios;
+using MercadoLivreSimulacao.Lib.Data.Repositorios.Interface;
 
 namespace ProjetoMercadoLivre.Web.Controllers;
 
@@ -12,9 +13,9 @@ public class ProdutoController : ControllerBase
 
 
     private readonly ILogger<ProdutoController> _logger;
-    private readonly ProdutoRepositorio _repositorio;
+    private readonly IProdutoRepositorio _repositorio;
 
-    public ProdutoController(ILogger<ProdutoController> logger, ProdutoRepositorio repositorio)
+    public ProdutoController(ILogger<ProdutoController> logger, IProdutoRepositorio repositorio)
     {
         _logger = logger;
         _repositorio = repositorio;

@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using MercadoLivreSimulacao.Lib.Models;
 using MercadoLivreSimulacao.Lib.Data.Repositorios;
+using MercadoLivreSimulacao.Lib.Data.Repositorios.Interface;
 
 namespace ProjetoMercadoLivre.Web.Controllers;
 
@@ -12,9 +13,9 @@ public class PedidoController : ControllerBase
 
 
     private readonly ILogger<PedidoController> _logger;
-    private readonly PedidoRepositorio _repositorio;
+    private readonly IPedidoRepositorio _repositorio;
 
-    public PedidoController(ILogger<PedidoController> logger, PedidoRepositorio repositorio)
+    public PedidoController(ILogger<PedidoController> logger, IPedidoRepositorio repositorio)
     {
         _logger = logger;
         _repositorio = repositorio;

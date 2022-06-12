@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using MercadoLivreSimulacao.Lib.Models;
 using MercadoLivreSimulacao.Lib.Data.Repositorios;
+using MercadoLivreSimulacao.Lib.Data.Repositorios.Interface;
 
 namespace ProjetoMercadoLivre.Web.Controllers;
 
@@ -12,9 +13,9 @@ public class VendedorController : ControllerBase
 
 
     private readonly ILogger<VendedorController> _logger;
-    private readonly VendedorRepositorio _repositorio;
+    private readonly IVendedorRepositorio _repositorio;
 
-    public VendedorController(ILogger<VendedorController> logger, VendedorRepositorio repositorio)
+    public VendedorController(ILogger<VendedorController> logger, IVendedorRepositorio repositorio)
     {
         _logger = logger;
         _repositorio = repositorio;

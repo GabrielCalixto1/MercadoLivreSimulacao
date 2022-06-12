@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using MercadoLivreSimulacao.Lib.Models;
 using MercadoLivreSimulacao.Lib.Data.Repositorios;
+using MercadoLivreSimulacao.Lib.Data.Repositorios.Interface;
 
 namespace ProjetoMercadoLivre.Web.Controllers;
 
@@ -12,9 +13,9 @@ public class TransportadoraController : ControllerBase
 
 
     private readonly ILogger<TransportadoraController> _logger;
-    private readonly TransportadoraRepositorio _repositorio;
+    private readonly ITransportadoraRepositorio _repositorio;
 
-    public TransportadoraController(ILogger<TransportadoraController> logger, TransportadoraRepositorio repositorio)
+    public TransportadoraController(ILogger<TransportadoraController> logger, ITransportadoraRepositorio repositorio)
     {
         _logger = logger;
         _repositorio = repositorio;

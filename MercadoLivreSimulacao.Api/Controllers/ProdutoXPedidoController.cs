@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using MercadoLivreSimulacao.Lib.Data;
 using MercadoLivreSimulacao.Lib.Models;
 using MercadoLivreSimulacao.Api.DTOs;
+using MercadoLivreSimulacao.Lib.Data.Repositorios.Interface;
 
 namespace ProjetoMercadoLivre.Web.Controllers;
 
@@ -14,53 +15,44 @@ public class ProdutoXPedidoController : ControllerBase
 
 
     private readonly ILogger<ProdutoXPedidoController> _logger;
-    private readonly MercadoLivreContext _context;
+    private readonly IProdutoXPedidoRepositorio _repositorio;
 
-    public ProdutoXPedidoController(ILogger<ProdutoXPedidoController> logger, MercadoLivreContext context)
+    public ProdutoXPedidoController(ILogger<ProdutoXPedidoController> logger, IProdutoXPedidoRepositorio repositorio)
     {
         _logger = logger;
-        _context = context;
+        _repositorio = repositorio;
     }
 
     [HttpGet("ListarTodos")]
     public IActionResult ListarTodos()
     {
-        var produtoXProdutoXPedidos = _context.ProdutoXPedidoDb.AsNoTracking().ToList();
-        return Ok(produtoXProdutoXPedidos);
-    }
 
-    [HttpGet("ListarUm")]
-    public IActionResult ListarUm(int id)
+        return Ok(_repositorio.GetTodos);
+    }
+    [HttpGet("MostrarPorId")]
+    public IActionResult MostrarItem(int id)
     {
-        var produtoXProdutoXPedido = _context.ProdutoXPedidoDb.Find(id);
-        return Ok(produtoXProdutoXPedido);
+        return Ok(_repositorio.MostrarPorId(id));
     }
 
     [HttpPost("Adicionar")]
-    public IActionResult Adicionar(ProdutoXPedidoDTO produtoXProdutoXPedidoDto)
+    public IActionResult Adicionar(ProdutoXPedido item)
     {
-        var produtoXProdutoXPedido = new ProdutoXPedido(produtoXProdutoXPedidoDto.IdProdutoXPedido, produtoXProdutoXPedidoDto.IdProduto, produtoXProdutoXPedidoDto.IdPedido);
-        _context.ProdutoXPedidoDb.Add(produtoXProdutoXPedido);
-        _context.SaveChanges();
-        return Ok(produtoXProdutoXPedido);
+        _repositorio.AdicionarItem(item);
+        return Ok("Adicionado item com sucesso!!");
     }
-
 
     [HttpDelete("Deletar")]
-    public IActionResult Deletar(int id)
+    public IActionResult DeletarPorId(int id)
     {
-        var produtoXProdutoXPedido = _context.ProdutoXPedidoDb.Find(id);
-        _context.ProdutoXPedidoDb.Remove(produtoXProdutoXPedido);
-        _context.SaveChanges();
-        return Ok();
+        _repositorio.DeletarPorId(id);
+        return Ok("Deletado com sucesso!!");
     }
-        [HttpPut("AlterarValor")]
-    public IActionResult AlterarValor(int id, int idProduto)
+
+    [HttpPut("AlterarProduto")]
+    public IActionResult AlterarProduto(int id, int idProduto)
     {
-        var produtoXPedido = _context.ProdutoXPedidoDb.Find(id);
-        var produto = _context.ProdutoDb.Find(idProduto);
-        produtoXPedido.Produto = produto;
-        _context.SaveChanges();
-        return Ok("Alteracao bem sucedida!");
+        _repositorio.AlterarProduto(id, idProduto);
+        return Ok("Valor alterado com sucesso!!");
     }
 }

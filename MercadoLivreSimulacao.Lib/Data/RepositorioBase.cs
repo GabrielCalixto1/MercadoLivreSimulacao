@@ -42,9 +42,5 @@ namespace MercadoLivreSimulacao.Lib.Data.Repositorios
 
         }
 
-        public List<T> BuscarTodos()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

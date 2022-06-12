@@ -4,7 +4,7 @@ namespace MercadoLivreSimulacao.Lib.Data.Repositorios
 {
 
 
-    public class ProdutoXPedidoRepositorio : RepositorioBase<ProdutoXPedido>, IProdutoXPedidoRepositorio 
+    public class ProdutoXPedidoRepositorio : RepositorioBase<ProdutoXPedido>, IProdutoXPedidoRepositorio
     {
 
 
@@ -14,7 +14,13 @@ namespace MercadoLivreSimulacao.Lib.Data.Repositorios
         {
             _context = context;
         }
-    
+        public void AlterarProduto(int id, int idProduto)
+        {
+            var produtoXPedido = _context.ProdutoXPedidoDb.Find(id);
+            var produto = _context.ProdutoDb.Find(idProduto);
+            produtoXPedido.Produto = produto;
+            _context.SaveChanges();
+        }
 
     }
 }

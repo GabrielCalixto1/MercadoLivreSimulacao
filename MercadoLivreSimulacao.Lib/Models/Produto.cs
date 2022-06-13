@@ -2,7 +2,6 @@ namespace MercadoLivreSimulacao.Lib.Models
 {
     public class Produto : ModelBase
     {
-        public int IdProduto { get; set; }
         public string Nome { get; set; }
         public string Descricao { get; set; }
         public double Valor { get; private set; }
@@ -14,9 +13,9 @@ namespace MercadoLivreSimulacao.Lib.Models
         public virtual Vendedor Vendedor { get; set; }
         public List<ProdutoXPedido> ListaProdutosXPedidos { get; set; }
 
-        public Produto(int idProduto, int idVendedor, string nome, string descricao, double valor, DateTime dataCadastro)
+        public Produto(int idProduto, int idVendedor, string nome, string descricao, double valor, DateTime dataCadastro) : base(idProduto)
         {
-            IdProduto = idProduto;
+          
             Nome = nome;
             Descricao = descricao;
             SetValor(valor);

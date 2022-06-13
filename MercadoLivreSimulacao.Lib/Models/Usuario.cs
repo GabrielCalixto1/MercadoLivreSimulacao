@@ -2,7 +2,6 @@ namespace MercadoLivreSimulacao.Lib.Models
 {
     public class Usuario : ModelBase
     {
-        public int IdUsuario { get; set; }
         public string Nome { get; set; }
         public string Email { get; private set; }
         public string Cpf { get; set; }
@@ -12,9 +11,9 @@ namespace MercadoLivreSimulacao.Lib.Models
 
         public virtual List<Pedido> ListaPedidos { get; set; } = new List<Pedido>();
 
-        public Usuario(int idUsuario, string nome, string email, string cpf, DateTime dataNascimento, string senha)
+        public Usuario(int idUsuario, string nome, string email, string cpf, DateTime dataNascimento, string senha)  : base(idUsuario)
         {
-            IdUsuario = idUsuario;
+ 
             Nome = nome;
             SetEmail(email);
             Cpf = cpf;

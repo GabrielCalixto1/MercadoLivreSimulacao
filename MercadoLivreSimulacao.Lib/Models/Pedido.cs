@@ -3,7 +3,6 @@ namespace MercadoLivreSimulacao.Lib.Models
 {
     public class Pedido : ModelBase
     {
-        public int IdPedido { get; set; }
         public DateTime DataPedido { get; private set; }
         public string StatusPedido { get; private set; }
         public int IdTransportadora { get; set; }
@@ -14,10 +13,9 @@ namespace MercadoLivreSimulacao.Lib.Models
         public virtual Usuario Usuario { get; set; }
         public List<ProdutoXPedido> ListaProdutosXPedidos { get; set; }
 
-        public Pedido(int idPedido, int idTransportadora, int idUsuario, DateTime dataPedido, string statusPedido)
+        public Pedido(int idPedido, int idTransportadora, int idUsuario, DateTime dataPedido, string statusPedido) : base(idPedido)
         {
-            IdPedido = idPedido;
-            IdTransportadora = idTransportadora;
+  
             IdUsuario = idUsuario;
             SetData(dataPedido);
             SetStatusPedido(statusPedido);

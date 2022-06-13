@@ -2,7 +2,6 @@ namespace MercadoLivreSimulacao.Lib.Models
 {
     public class Vendedor : ModelBase
     {
-        public int IdVendedor { get; set; }
         public string Nome { get; set; }
         public string Email { get; set; }
         public string Cnpj { get; set; }
@@ -11,9 +10,9 @@ namespace MercadoLivreSimulacao.Lib.Models
 
         public List<Produto> ListaProdutos { get; set; } = new List<Produto>();
 
-        public Vendedor(int idVendedor, string nome, string email, string cnpj, DateTime dataCadastro)
+        public Vendedor(int idVendedor, string nome, string email, string cnpj, DateTime dataCadastro)  : base(idVendedor)
         {
-            IdVendedor = idVendedor;
+ 
             Nome = nome;
             SetEmail(email);
             Cnpj = cnpj;

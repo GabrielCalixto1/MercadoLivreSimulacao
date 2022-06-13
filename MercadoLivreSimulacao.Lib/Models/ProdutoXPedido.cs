@@ -2,16 +2,15 @@ namespace MercadoLivreSimulacao.Lib.Models
 {
     public class ProdutoXPedido : ModelBase
     {
-        public int IdProdutoXPedido { get; set; }
         public int IdProduto { get; set; }
         public int IdPedido { get; set; }
 
 
         public virtual Pedido Pedido {get; set;}
         public virtual Produto Produto {get; set;}
-        public ProdutoXPedido(int idProdutoXPedido, int idProduto, int idPedido)
+        public ProdutoXPedido(int idProdutoXPedido, int idProduto, int idPedido)  : base(idProdutoXPedido)
         {
-            IdProdutoXPedido = idProdutoXPedido;
+       
             IdProduto = idProduto;
             IdPedido = idPedido;
         }

@@ -2,7 +2,7 @@ namespace MercadoLivreSimulacao.Lib.Models
 {
     public class Transportadora : ModelBase
     {
-        public int IdTransportadora { get; set; }
+
         public string Nome { get; set; }
         public string Telefone { get; private set; }
         public string Email { get; private set; }
@@ -10,9 +10,9 @@ namespace MercadoLivreSimulacao.Lib.Models
 
         public List<Pedido> ListaPedidos { get; set; } = new List<Pedido>();
 
-        public Transportadora(int idTransportadora, string nome, string telefone, string email)
+        public Transportadora(int idTransportadora, string nome, string telefone, string email)  : base(idTransportadora)
         {
-            IdTransportadora = idTransportadora;
+         
             Nome = nome;
             SetTelefone(telefone);
             SetEmail(email);

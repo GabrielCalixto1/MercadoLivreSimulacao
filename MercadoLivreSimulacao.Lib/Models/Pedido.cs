@@ -5,7 +5,7 @@ namespace MercadoLivreSimulacao.Lib.Models
     {
         public int IdPedido { get; set; }
         public DateTime DataPedido { get; private set; }
-        public string StatusPedido { get; set; }
+        public string StatusPedido { get; private set; }
         public int IdTransportadora { get; set; }
         public int IdUsuario { get; set; }
 
@@ -20,16 +20,17 @@ namespace MercadoLivreSimulacao.Lib.Models
             IdTransportadora = idTransportadora;
             IdUsuario = idUsuario;
             SetData(dataPedido);
-            SetStatusPedido(StatusPedido);
+            SetStatusPedido(statusPedido);
 
         }
 
         public void SetData(DateTime dataPedido)
         {
-            if (DataEMaiorQueDataAtual(dataPedido))
+            if (DataEMenorQueDataAtual(dataPedido))
             {
-                DataPedido = dataPedido;
+                 DataPedido = dataPedido;
             }
+           
         }
         public void SetStatusPedido(string status)
         {

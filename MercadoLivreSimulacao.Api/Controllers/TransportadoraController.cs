@@ -25,7 +25,7 @@ public class TransportadoraController : ControllerBase
     public IActionResult ListarTodos()
     {
         
-        return Ok(_repositorio.GetTodos);
+        return Ok(_repositorio.GetTodos());
     }
       [HttpGet("MostrarPorId")]
     public IActionResult MostrarItem(int id)

@@ -18,7 +18,7 @@ namespace MercadoLivreSimulacao.Lib.Data.Repositorios
         public void AlterarStatus(int id, string status)
         {
             var item = _context.PedidoDb.Find(id);
-            item.StatusPedido = status;
+            item.SetStatusPedido(status);
             _context.SaveChanges();
         }
 

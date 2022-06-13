@@ -28,7 +28,7 @@ namespace MercadoLivreSimulacao.Lib.Models
         }
         public void SetData(DateTime dataProduto)
         {
-            if (DataEMaiorQueDataAtual(dataProduto))
+            if (DataEMenorQueDataAtual(dataProduto))
             {
                 DataCadastro = dataProduto;
             }

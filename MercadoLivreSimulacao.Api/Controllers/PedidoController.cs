@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
 using MercadoLivreSimulacao.Lib.Models;
-using MercadoLivreSimulacao.Lib.Data.Repositorios;
 using MercadoLivreSimulacao.Lib.Data.Repositorios.Interface;
 
 namespace ProjetoMercadoLivre.Web.Controllers;

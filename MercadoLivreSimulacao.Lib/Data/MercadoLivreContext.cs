@@ -35,7 +35,7 @@ namespace MercadoLivreSimulacao.Lib.Data
                         .HasOne(x => x.Transportadora)
                         .WithMany(x => x.ListaPedidos)
                         .HasForeignKey(x => x.IdTransportadora);
-        
+
 
             modelBuilder.Entity<ProdutoXPedido>().ToTable("ml_produtosxpedidos");
             modelBuilder.Entity<ProdutoXPedido>().HasKey(key => key.IdProdutoXPedido);
@@ -47,6 +47,8 @@ namespace MercadoLivreSimulacao.Lib.Data
                         .HasOne(x => x.Pedido)
                         .WithMany(x => x.ListaProdutosXPedidos)
                         .HasForeignKey(x => x.IdPedido);
+            modelBuilder.Entity<ProdutoXPedido>().Property(x => x.IdProdutoXPedido).HasColumnName("id_produtoxpedido");
+
                                                                                                   
             modelBuilder.Entity<Transportadora>().ToTable("ml_transportadoras");
             modelBuilder.Entity<Transportadora>().HasKey(key => key.IdTransportadora);
@@ -54,6 +56,10 @@ namespace MercadoLivreSimulacao.Lib.Data
                         .HasMany(x => x.ListaPedidos)
                         .WithOne(x => x.Transportadora)
                         .HasForeignKey(x => x.IdTransportadora);
+            modelBuilder.Entity<Transportadora>().Property(x => x.Email).HasColumnName("email_transportadora");
+            modelBuilder.Entity<Transportadora>().Property(x => x.Telefone).HasColumnName("telefone_transportadora");
+            modelBuilder.Entity<Transportadora>().Property(x => x.Nome).HasColumnName("nome_transportadora");
+            
 
             modelBuilder.Entity<Usuario>().ToTable("ml_usuarios");
             modelBuilder.Entity<Usuario>().HasKey(key => key.IdUsuario);
@@ -61,6 +67,7 @@ namespace MercadoLivreSimulacao.Lib.Data
                         .HasMany(x => x.ListaPedidos)
                         .WithOne(x => x.Usuario)
                         .HasForeignKey(x => x.IdUsuario);
+            modelBuilder.Entity<Usuario>().Property(x => x.Email).HasColumnName("email_usuario");
 
             modelBuilder.Entity<Vendedor>().ToTable("ml_vendedores");
             modelBuilder.Entity<Vendedor>().HasKey(key => key.IdVendedor);
